@@ -9,6 +9,7 @@ def create_spark_session(app_name: str) -> SparkSession:
     warehouse_dir = str(project_root / "spark-warehouse").replace("\\", "/")
     spark_local_dir = str(project_root / "tmp" / "spark-local").replace("\\", "/")
     checkpoint_dir = str(project_root / "spark-checkpoints").replace("\\", "/")
+    postgres_jar = str(project_root / "jars" / "postgresql-42.7.4.jar").replace("\\", "/")
 
     Path(warehouse_dir).mkdir(parents=True, exist_ok=True)
     Path(spark_local_dir).mkdir(parents=True, exist_ok=True)
@@ -28,6 +29,7 @@ def create_spark_session(app_name: str) -> SparkSession:
         .config("spark.sql.catalogImplementation", "in-memory")
         .config("spark.driver.extraJavaOptions", f"-Djava.io.tmpdir={spark_local_dir}")
         .config("spark.executor.extraJavaOptions", f"-Djava.io.tmpdir={spark_local_dir}")
+        .config("spark.jars",f"file:///{postgres_jar}")
         .getOrCreate()
     )
 
