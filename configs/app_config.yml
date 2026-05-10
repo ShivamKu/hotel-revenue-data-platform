@@ -1,0 +1,24 @@
+app:
+  name: hotel-revenue-data-platform
+  environment: local
+
+paths:
+  raw_reservations_csv: data/raw/reservations/csv
+  raw_reservations_json: data/raw/reservations/json
+
+  bronze_reservations: data/bronze/reservations
+  silver_reservations: data/silver/reservations
+  gold_daily_revenue: data/gold/daily_revenue
+
+  rejected_reservations: data/rejected/reservations
+
+data_generation:
+  reservation_count: 2000
+  business_date: "2026-05-09"
+
+postgres:
+  host: localhost
+  port: 5433
+  database: hotel_revenue_db
+  user: postgres
+  password: 2026Perfect!on
