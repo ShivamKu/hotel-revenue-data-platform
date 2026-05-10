@@ -14,7 +14,7 @@ paths:
 
 data_generation:
   reservation_count: 5000
-  business_date: "2026-05-10"
+  business_date: "2026-05-11"
 
 postgres:
   host: localhost

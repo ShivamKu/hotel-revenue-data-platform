@@ -38,3 +38,26 @@ def execute_postgres_sql(postgres_config: dict, sql: str) -> None:
     finally:
         if conn:
             conn.close()
+
+def fetch_single_value(postgres_config: dict, sql: str):
+    """
+    Executes a SQL query and returns first column of first row.
+    """
+
+    conn = None
+
+    try:
+        conn = get_postgres_connection(postgres_config)
+
+        with conn.cursor() as cursor:
+            cursor.execute(sql)
+            result = cursor.fetchone()
+
+        if result:
+            return result[0]
+
+        return None
+
+    finally:
+        if conn:
+            conn.close()

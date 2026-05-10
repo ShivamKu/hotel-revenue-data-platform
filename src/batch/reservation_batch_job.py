@@ -36,7 +36,7 @@ def add_validation_reason(df: DataFrame) -> DataFrame:
                       .when(col("arrival_date").isNull(), lit("ARRIVAL_DATE_NULL"))
                       .when(col("departure_date").isNull(), lit("DEPARTURE_DATE_NULL"))
                       .when(
-                          to_date(col("arrival_date"), "dd-MM-yyyy") >= to_date(col("departure_date"), "dd-MM-yyyy"),
+                          to_date(col("arrival_date")) >= to_date(col("departure_date")),
                           lit("INVALID_STAY_DATES")
                       )
                       .when(col("room_count") <= 0, lit("INVALID_ROOM_COUNT"))
@@ -52,10 +52,10 @@ def create_silver(valid_df: DataFrame) -> DataFrame:
 
     return (
         valid_df
-        .withColumn("arrival_date", to_date(col("arrival_date"), "dd-MM-yyyy"))
-        .withColumn("departure_date", to_date(col("departure_date"), "dd-MM-yyyy"))
-        .withColumn("created_ts", to_timestamp(col("created_ts"), "dd-MM-yyyy HH:mm"))
-        .withColumn("updated_ts", to_timestamp(col("updated_ts"), "dd-MM-yyyy HH:mm"))
+        .withColumn("arrival_date", to_date(col("arrival_date")))
+        .withColumn("departure_date", to_date(col("departure_date")))
+        .withColumn("created_ts", to_timestamp(col("created_ts")))
+        .withColumn("updated_ts", to_timestamp(col("updated_ts")))
         .withColumn("room_count", col("room_count").cast("int"))
         .withColumn("total_revenue", col("total_revenue").cast("double"))
         .withColumn("silver_ingestion_ts", current_timestamp())

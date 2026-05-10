@@ -10,7 +10,7 @@ from src.common.logger import get_logger
 logger = get_logger(__name__)
 fake = Faker()
 
-PROPERTY_CODES = ["BLR001","BLR002","DEL001","MUM001","HYD001"]
+PROPERTY_CODES = ["BLR001","BLR002","DEL001","MUM001","HYD001","CHN001","DEL002","MUM002","KOL001","KER001","CHA001"]
 ROOM_TYPES = ["STD","DLX","STE","KING","QUEEN"]
 RATE_PLAN=["BAR","CORP","MEMBER","PKG","PREPAY"]
 PRICE_PLAN_MAPPING={
